@@ -1,0 +1,11 @@
+# Example parameters.yaml
+# YAML files are often used to store more complex configurations, especially when dealing with nested structures. This file might include configurations similar to those in config.py but organized in a more structured manner.
+
+# data:
+#   directory: /path/to/data
+# model:
+#   learning_rate: 0.001
+#   num_layers: 3
+#   hidden_units: 128
+# api:
+#   endpoint: https://api.example.com
