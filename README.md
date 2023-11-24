@@ -1,4 +1,4 @@
-# MLOPS Template
+MLOPS Template
 
 The recommended directory structure for MLOps (Machine Learning Operations) projects can vary depending on the specific tools, frameworks, and practices used. However, here's a common and flexible directory structure that you can use as a starting point:
 
