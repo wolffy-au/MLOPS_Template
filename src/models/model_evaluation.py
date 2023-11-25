@@ -1,7 +1,7 @@
 # Example model_evaluation.py
 
 import matplotlib.pyplot as plt
-from sklearn.metrics import plot_confusion_matrix
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score, classification_report
 
@@ -14,11 +14,17 @@ def evaluate_model(model, X_test, y_test):
 
 # Visualization Functions: Functions for creating visualizations that help you understand model performance, such as confusion matrices, ROC curves, and precision-recall curves.
 def plot_confusion_matrix(model, X_test, y_test):
-    disp = plot_confusion_matrix(model, X_test, y_test, cmap=plt.cm.Blues, normalize='true')
-    disp.ax_.set_title('Confusion Matrix')
+    y_pred = model.predict(X_test)
+    cm = confusion_matrix(y_test, y_pred, normalize='true')
+    
+    # disp = plot_confusion_matrix(model, X_test, y_test, cmap=plt.cm.Blues, normalize='true')
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=model.classes_)
+    disp.plot(cmap=plt.cm.Blues)
+    
+    plt.title('Confusion Matrix')
     plt.show()
 
 # Cross-Validation: If you use cross-validation to assess model performance, you might include functions for performing cross-validation and summarizing the results.
-def cross_validate_model(model, X, y, cv=5):
-    scores = cross_val_score(model, X, y, cv=cv)
+def cross_validate_model(model, X, y, cv=5, scoring='accuracy'):
+    scores = cross_val_score(model, X, y, cv=cv, scoring=scoring)
     return scores.mean(), scores.std()
