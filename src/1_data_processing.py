@@ -3,7 +3,7 @@
 # It is typically executed as a part of the CI/CD pipeline to ensure consistent data processing.
 # May be triggered whenever new data is available or as a scheduled task.
 
-from data.data_loading import load_csv_data, explore_dataset
+from data.data_loading import load_csv_data, explore_dataset, save_datasets
 from data.data_preprocessing import split_train_test
 from utils.algorithm_evaluation import algorithm_evaluation, compare_algorithms
 
@@ -20,3 +20,5 @@ X_train, X_validation, Y_train, Y_validation = split_train_test(dataset, random_
 
 results, names = algorithm_evaluation(X_train, Y_train)
 # compare_algorithms(results, names)
+
+save_datasets([X_train, X_validation, Y_train, Y_validation], ["X_train", "X_validation", "Y_train", "Y_validation"])
