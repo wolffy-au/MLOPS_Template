@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    environment {
+        PYTHON_HOME = tool 'Python3'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    checkout scm
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    sh "${PYTHON_HOME}/bin/pip install -r requirements.txt"
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    sh "${PYTHON_HOME}/bin/python -m pytest"
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Add deployment steps as needed
+            }
+        }
+    }
+}
