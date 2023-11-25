@@ -5,3 +5,4 @@ pandas
 pytest
 scikit-learn
 scipy
+ninja==1.5.3
