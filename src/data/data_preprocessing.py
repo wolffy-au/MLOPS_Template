@@ -1,4 +1,5 @@
 # Example data_preprocessing.py
+from sklearn.model_selection import train_test_split
 
 # Data Cleaning: Functions for cleaning the data, handling missing values, and addressing any inconsistencies in the dataset.
 def handle_missing_values(data):
@@ -24,6 +25,11 @@ def encode_categorical_features(data):
     pass
 
 # Train-Test Splitting: Functions to split the data into training and testing sets, an essential step in model development.
-def split_train_test(data, test_size=0.2, random_state=42):
+def split_train_test(dataset, test_size=0.2, random_state=42):
     # Code for splitting the data into training and testing sets
-    pass
+    # Split-out validation dataset
+    array = dataset.values
+    X = array[:, :-1]
+    y = array[:, -1]
+    X_train, X_validation, Y_train, Y_validation = train_test_split(X, y, test_size, random_state)
+    return X_train, X_validation, Y_train, Y_validation
