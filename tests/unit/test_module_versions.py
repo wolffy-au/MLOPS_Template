@@ -23,3 +23,7 @@ def test_pandas_version():
 def test_sklearn_version():
     sklearn_version_output = subprocess.check_output(['pip', 'show', 'scikit-learn'], text=True)
     assert 'scikit-learn' in sklearn_version_output
+
+def test_joblib_version():
+    joblib_version_output = subprocess.check_output(['pip', 'show', 'joblib'], text=True)
+    assert 'joblib' in joblib_version_output

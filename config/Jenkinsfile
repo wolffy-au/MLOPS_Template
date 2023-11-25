@@ -3,13 +3,22 @@ pipeline {
 
     environment {
         PYTHON_HOME = tool 'Python3'
+        GIT_CREDENTIALS = credentials('1feb3df2-c165-4ef1-b4f4-2b195de9e731')
     }
 
     stages {
         stage('Checkout') {
             steps {
                 script {
-                    checkout scm
+                    // Checkout source code from Gitea repository
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: 'MLTutorial']],  // Update to your actual branch name
+                        userRemoteConfigs: [[
+                            url: 'http://10.61.1.15:3000/wolffy-au/MLOPS_Template.git',
+                            credentialsId: GIT_CREDENTIALS
+                        ]]
+                    ])
                 }
             }
         }
@@ -17,7 +26,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh "${PYTHON_HOME}/bin/pip install -r requirements.txt"
+                    sh "${PYTHON_HOME}pip3 install -r requirements.txt"
                 }
             }
         }
@@ -32,6 +41,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
+                echo "Add deployment steps here"
                 // Add deployment steps as needed
             }
         }

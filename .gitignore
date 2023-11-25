@@ -165,4 +165,4 @@ cython_debug/
 #  want to enforce a consistent development environment across the team, consider including the .vscode
 #  directory. If the settings in the .vscode directory are mainly for personal preferences, or if they
 #  are likely to cause conflicts across different development environments, consider excluding it.
-#.vscode/
+.vscode/
