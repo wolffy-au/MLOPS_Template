@@ -29,7 +29,7 @@ def test_split_train_test(mock_train_test_split):
     mock_train_test_split.assert_called_once_with(
         mock_dataset.values[:, :-1],  # X
         mock_dataset.values[:, -1],    # y
-        0.2,                           # test_size
-        42                             # random_state
+        test_size=0.2,                           # test_size
+        random_state=42                             # random_state
     )
 
