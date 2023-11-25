@@ -31,5 +31,5 @@ def split_train_test(dataset, test_size=0.2, random_state=42):
     array = dataset.values
     X = array[:, :-1]
     y = array[:, -1]
-    X_train, X_validation, Y_train, Y_validation = train_test_split(X, y, test_size, random_state)
+    X_train, X_validation, Y_train, Y_validation = train_test_split(X, y, test_size=test_size, random_state=random_state)
     return X_train, X_validation, Y_train, Y_validation
