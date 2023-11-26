@@ -6,8 +6,6 @@ import os
 from matplotlib import pyplot as plt
 from pandas.plotting import scatter_matrix
 
-SAVE_DATASET_PATH = "data/raw/"
-
 # Data Loading Functions: This file may contain functions for loading data from various sources, such as CSV files, databases, APIs, or other formats. The goal is to abstract away the details of data loading so that it can be easily reused throughout the project.
 def load_csv_data(file_path):
     return pd.read_csv(file_path)
@@ -44,17 +42,33 @@ def explore_dataset(dataset):
     scatter_matrix(dataset)
     plt.show()
 
+SAVE_DATASET_PATH = os.path.normpath("data/raw/")
+
 def save_datasets(datasets, filenames, save_path=SAVE_DATASET_PATH):
+    save_path = os.path.normpath(save_path)
+    if isinstance(filenames, str):
+        filenames = [filenames]
     for (dataset, filename) in zip(datasets, filenames):
-        jl.dump(dataset, f"{save_path}{filename}.dataset")
+        dataset_path = os.path.join(save_path, f"{filename}.dataset")
+        jl.dump(dataset, dataset_path)
 
 def load_datasets(filenames, save_path=SAVE_DATASET_PATH):
+    save_path = os.path.normpath(save_path)
+    if isinstance(filenames, str):
+        filenames = [filenames]
     datasets = []
     for filename in filenames:
-        datasets.append(jl.load(f"{save_path}{filename}.dataset"))
+        dataset_path = os.path.join(save_path, f"{filename}.dataset")
+        if os.path.exists(dataset_path):
+            datasets.append(jl.load(dataset_path))
+
     return datasets
 
 def clear_datasets(filenames, save_path=SAVE_DATASET_PATH):
+    save_path = os.path.normpath(save_path)
+    if isinstance(filenames, str):
+        filenames = [filenames]
     for filename in filenames:
-        file_path = os.path.join(f"{save_path}{filename}.dataset")
-        os.remove(file_path)
+        dataset_path = os.path.join(save_path, f"{filename}.dataset")
+        if os.path.exists(dataset_path):
+            os.remove(dataset_path)

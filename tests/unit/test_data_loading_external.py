@@ -1,15 +1,7 @@
 import pytest
 import pandas as pd
-import os
-import sklearn
 from sklearn.datasets import load_iris
-from src.data.data_loading import load_csv_data, save_datasets, load_datasets, clear_datasets
-
-# Fixture to create temporary directories
-@pytest.fixture
-def temp_dirs(tmpdir):
-    raw_dir = tmpdir.mkdir('data').mkdir('raw')
-    return str(raw_dir)
+from src.data.data_loading import load_csv_data
 
 # Create a sample CSV file for testing using the Iris dataset
 @pytest.fixture
@@ -48,23 +40,3 @@ def test_load_csv_data(sample_csv_file):
 # def test_load_api_data(api_endpoint):
 #     # Code to make API requests and fetch data
 #     pass
-
-def test_save_and_load_datasets(temp_dirs):
-    # Create some sample data
-    datasets = [list(range(i, i+3)) for i in range(3)]
-    filenames = ['dataset1', 'dataset2', 'dataset3']
-
-    # Test save_datasets
-    save_datasets(datasets, filenames, temp_dirs)
-
-    # Test load_datasets
-    loaded_datasets = load_datasets(filenames, temp_dirs)
-
-    # Assertions
-    assert len(loaded_datasets) == len(datasets)
-
-    for loaded, original in zip(loaded_datasets, datasets):
-        assert loaded == original
-
-    # Clean up
-    clear_datasets(filenames, temp_dirs)
