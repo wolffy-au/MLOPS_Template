@@ -7,20 +7,21 @@ from sklearn.svm import SVC
 from data.data_loading import load_datasets
 from models.model_loading import load_models, save_models
 from models.model_training import train_model
+from models.model_evaluation import confusion_matrix_model, plot_confusion_matrix
 
-[X_train, X_validation, Y_train, Y_validation] = load_datasets(["X_train", "X_validation", "Y_train", "Y_validation"])
+print("Loading training datasets")
+[X_train, Y_train] = load_datasets(["X_train", "Y_train"])
 
 print("Loading previous model")
 model_name = "finalised_model"
-model = load_models(model_name)
-
-
+[model] = load_models(model_name)
 
 if model == []:
-    print("Creating new model")
+    print("Does not exist - creating new model")
     model = SVC(gamma='auto')
+    print("Training model")
+    train_model(model, X_train, Y_train)
+    print("Saving model")
+    save_models(model, model_name)
 
-# model.fit(X_train, Y_train)
-train_model(model, X_train, Y_train)
-save_models(model, model_name)
-
+# plot_confusion_matrix(confusion_matrix_model(model, X_train, Y_train), model)
