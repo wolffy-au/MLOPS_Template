@@ -12,19 +12,21 @@ def evaluate_model(model, X_test, y_test):
     report = classification_report(y_test, y_pred)
     return accuracy, report
 
-# Visualization Functions: Functions for creating visualizations that help you understand model performance, such as confusion matrices, ROC curves, and precision-recall curves.
-def plot_confusion_matrix(model, X_test, y_test):
+# Cross-Validation: If you use cross-validation to assess model performance, you might include functions for performing cross-validation and summarizing the results.
+def cross_validate_model(model, X, y, cv=5, scoring='accuracy'):
+    scores = cross_val_score(model, X, y, cv=cv, scoring=scoring)
+    return scores.mean(), scores.std()
+
+# Performance Functions: Functions that help you understand model performance, such as confusion matrices, ROC curves, and precision-recall curves.
+def confusion_matrix_model(model, X_test, y_test):
     y_pred = model.predict(X_test)
-    cm = confusion_matrix(y_test, y_pred, normalize='true')
-    
-    # disp = plot_confusion_matrix(model, X_test, y_test, cmap=plt.cm.Blues, normalize='true')
-    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=model.classes_)
+    return confusion_matrix(y_test, y_pred, normalize='true')
+
+# Visualization Functions: Functions for creating visualizations that help you understand model performance, such as confusion matrices, ROC curves, and precision-recall curves.
+def plot_confusion_matrix(confusion_matrix, model):  
+    disp = ConfusionMatrixDisplay(confusion_matrix=confusion_matrix, display_labels=model.classes_)
     disp.plot(cmap=plt.cm.Blues)
     
     plt.title('Confusion Matrix')
     plt.show()
 
-# Cross-Validation: If you use cross-validation to assess model performance, you might include functions for performing cross-validation and summarizing the results.
-def cross_validate_model(model, X, y, cv=5, scoring='accuracy'):
-    scores = cross_val_score(model, X, y, cv=cv, scoring=scoring)
-    return scores.mean(), scores.std()
