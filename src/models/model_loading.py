@@ -1,7 +1,7 @@
 import joblib as jl
 import os
 
-SAVE_MODEL_PATH = os.path.normpath("data/raw/")
+SAVE_MODEL_PATH = os.path.normpath("data/processed/")
 
 def save_models(models, filenames, save_path=SAVE_MODEL_PATH):
     save_path = os.path.normpath(save_path)

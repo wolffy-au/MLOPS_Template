@@ -56,6 +56,9 @@ bin/: Executable scripts or binaries.
 config/: Configuration files and settings for your project.
 
 data/: This directory contains raw, processed, and external data.
+    external/: This directory often contains datasets that are obtained from external sources. The data in this directory is typically considered read-only and is not modified by the project itself. It may include raw data files, datasets acquired from external APIs, or other sources that are used for analysis or training.
+    raw/: This directory usually holds the raw, unprocessed data obtained from various sources, both internal and external. Raw data might be in its original form and may include data files, CSVs, Excel sheets, images, or any other data format. The contents of this directory may be modified during the data preprocessing phase, but the original data is generally preserved.
+    processed/: This directory typically contains data that has undergone some level of processing or transformation. Processed data may include cleaned datasets, feature-engineered data, or any other data that has been manipulated for analysis or model training. The contents of this directory are often the output of data preprocessing scripts or workflows.
 
 docs/: Documentation for the project.
 

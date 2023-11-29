@@ -42,7 +42,7 @@ def explore_dataset(dataset):
     scatter_matrix(dataset)
     plt.show()
 
-SAVE_DATASET_PATH = os.path.normpath("data/raw/")
+SAVE_DATASET_PATH = os.path.normpath("data/processed/")
 
 def save_datasets(datasets, filenames, save_path=SAVE_DATASET_PATH):
     save_path = os.path.normpath(save_path)
