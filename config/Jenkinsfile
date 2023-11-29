@@ -26,6 +26,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    sh "pkg upgrade python39 py39-pip py39-numpy py39-scipy py39-matplotlib py39-pandas py39-scikit-learn py39-joblib"
                     sh "${PYTHON_HOME}pip3 install -r requirements.txt"
                 }
             }
