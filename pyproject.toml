@@ -18,7 +18,17 @@ pytest = "^7"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.27.1"
+pyright = "^1.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pyright]
+# Optional: Specify the Python version for Pyright to use
+pythonVersion = "3.11"
+
+# Optional: Specify additional search paths for modules
+# This is useful if your project has a non-standard structure
+# For example, if your source code is in the 'src' directory:
+searchPaths = ["src"]
