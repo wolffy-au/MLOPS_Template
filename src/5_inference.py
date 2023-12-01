@@ -10,9 +10,7 @@ model_name = "finalised_model"
 [model] = load_models(model_name)
 
 data = [
-    [7.9, 4.4, 6.9, 2.5],
-    [7.3, 3.5, 2.5, 0.2],
-    [7.3, 3.5, 2.5, 0.3],
+    # Add sample data here
     ]
 
 for x in data:
