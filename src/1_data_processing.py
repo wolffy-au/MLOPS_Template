@@ -12,8 +12,6 @@ from utils.algorithm_evaluation import algorithm_evaluation, compare_algorithms
 file_path = "data/external/iris.csv"
 dataset = load_csv_data(file_path)
 
-dataset.columns = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
-
 # explore_dataset(dataset)
 
 X_train, X_validation, Y_train, Y_validation = split_train_test(dataset, random_state=1)

@@ -13,7 +13,7 @@ pipeline {
                     // Checkout source code from Gitea repository
                     checkout([
                         $class: 'GitSCM',
-                        branches: [[name: 'MLTutorial']],  // Update to your actual branch name
+                        branches: [[name: 'main']],  // Update to your actual branch name
                         userRemoteConfigs: [[
                             url: 'http://10.61.1.15:3000/wolffy-au/MLOPS_Template.git',
                             credentialsId: GIT_CREDENTIALS
