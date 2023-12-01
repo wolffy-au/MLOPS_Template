@@ -1,6 +1,8 @@
 import pytest
+import numpy as np
+import pandas as pd
 from unittest.mock import patch, MagicMock
-from src.data.data_preprocessing import split_train_test
+from src.data.data_preprocessing import split_train_test, get_xy
 
 # Mocking the train_test_split function
 @patch('src.data.data_preprocessing.train_test_split')  # Replace 'your_module' with the actual module name
@@ -32,4 +34,23 @@ def test_split_train_test(mock_train_test_split):
         test_size=0.2,                           # test_size
         random_state=42                             # random_state
     )
+
+# Test the get_xy function
+def test_get_xy():
+    data = {'feature1': [1, 2, 3],
+            'feature2': [4, 5, 6],
+            'target': [7, 8, 9]}
+    mock_dataset = pd.DataFrame(data)
+
+    X, Y = get_xy(mock_dataset)
+
+    # Check if X and Y have the correct shapes
+    assert isinstance(X, np.ndarray)
+    assert isinstance(Y, np.ndarray)
+    assert X.shape == (3, 2)  # Assuming 2 features
+    assert Y.shape == (3,)
+
+    # Check if the values are correct
+    np.testing.assert_array_equal(X, np.array([[1, 4], [2, 5], [3, 6]]))
+    np.testing.assert_array_equal(Y, np.array([7, 8, 9]))
 

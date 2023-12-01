@@ -28,8 +28,14 @@ def encode_categorical_features(data):
 def split_train_test(dataset, test_size=0.2, random_state=42):
     # Code for splitting the data into training and testing sets
     # Split-out validation dataset
+    X, Y = get_xy(dataset)
+    X_train, X_validation, Y_train, Y_validation = train_test_split(X, Y, test_size=test_size, random_state=random_state)
+    return X_train, X_validation, Y_train, Y_validation
+
+
+# Get XY: Functions to split the data into input and single output datasets
+def get_xy(dataset):
     array = dataset.values
     X = array[:, :-1]
-    y = array[:, -1]
-    X_train, X_validation, Y_train, Y_validation = train_test_split(X, y, test_size=test_size, random_state=random_state)
-    return X_train, X_validation, Y_train, Y_validation
+    Y = array[:, -1]
+    return X, Y
