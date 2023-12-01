@@ -7,8 +7,11 @@ from matplotlib import pyplot as plt
 from pandas.plotting import scatter_matrix
 
 # Data Loading Functions: This file may contain functions for loading data from various sources, such as CSV files, databases, APIs, or other formats. The goal is to abstract away the details of data loading so that it can be easily reused throughout the project.
-def load_csv_data(file_path):
-    return pd.read_csv(file_path)
+def load_csv_data(file_path, names=[]):
+    if len(names)==0:
+        return pd.read_csv(file_path)
+    else:
+        return pd.read_csv(file_path, names=names)
 
 def load_database_data(connection_string, query):
     # Code to connect to a database and fetch data
@@ -31,7 +34,8 @@ def explore_dataset(dataset):
     print()
 
     # box and whisker plots
-    dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
+    #dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
+    dataset.plot(kind='box', subplots=True, sharex=False, sharey=False)
     plt.show()
 
     # histograms
