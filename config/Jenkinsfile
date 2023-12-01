@@ -44,6 +44,7 @@ pipeline {
             steps {
                 echo "Add deployment steps here"
                 // Add deployment steps as needed
+                sh "${PYTHON_HOME}python src/5_inference.py"
             }
         }
     }
