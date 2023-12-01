@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         PYTHON_HOME = tool 'Python3'
-        GIT_CREDENTIALS = credentials('1feb3df2-c165-4ef1-b4f4-2b195de9e731')
+        GIT_CREDENTIALS = credentials('f2bf46a7-9469-401f-914c-5ee06e2af3c2')
     }
 
     stages {
