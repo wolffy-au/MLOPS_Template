@@ -7,21 +7,21 @@ from data.data_loading import load_datasets
 from models.model_loading import load_models
 from models.model_evaluation import evaluate_model, cross_validate_model, confusion_matrix_model, plot_confusion_matrix
 
-print("Loading validation datasets")
-[X_validation, Y_validation] = load_datasets(["X_validation", "Y_validation"])
+# print("Loading validation datasets")
+# [X_validation, Y_validation] = load_datasets(["X_validation", "Y_validation"])
 
-print("Loading previous model")
-model_name = "finalised_model"
-[model] = load_models(model_name)
+# print("Loading previous model")
+# model_name = "finalised_model"
+# [model] = load_models(model_name)
 
-print("Evaluating model")
-accuracy, report = evaluate_model(model, X_validation, Y_validation)
-print("Accuracy score: ", accuracy, "\n")
-print("Classification report:\n", report)
+# print("Evaluating model")
+# accuracy, report = evaluate_model(model, X_validation, Y_validation)
+# print("Accuracy score: ", accuracy, "\n")
+# print("Classification report:\n", report)
 
-cv_results_mean, cv_results_std = cross_validate_model(model, X_validation, Y_validation)
-print("Cross-validation: %f Mean (%f Standard)" % (cv_results_mean, cv_results_std))
+# cv_results_mean, cv_results_std = cross_validate_model(model, X_validation, Y_validation)
+# print("Cross-validation: %f Mean (%f Standard)" % (cv_results_mean, cv_results_std))
 
-cm = confusion_matrix_model(model, X_validation, Y_validation)
-print("Confusion Matrix:\n", cm)
+# cm = confusion_matrix_model(model, X_validation, Y_validation)
+# print("Confusion Matrix:\n", cm)
 # plot_confusion_matrix(cm, model)

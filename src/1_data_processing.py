@@ -9,14 +9,14 @@ from utils.algorithm_evaluation import algorithm_evaluation, compare_algorithms
 
 # Load dataset
 # url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/iris.csv"
-file_path = "data/external/iris.csv"
-dataset = load_csv_data(file_path)
+# file_path = "data/external/iris.csv"
+# dataset = load_csv_data(file_path)
 
-# explore_dataset(dataset)
+# # explore_dataset(dataset)
 
-X_train, X_validation, Y_train, Y_validation = split_train_test(dataset, random_state=1)
+# X_train, X_validation, Y_train, Y_validation = split_train_test(dataset, random_state=1)
 
-results, names = algorithm_evaluation(X_train, Y_train)
+# results, names = algorithm_evaluation(X_train, Y_train)
 # compare_algorithms(results, names)
 
-save_datasets([X_train, X_validation, Y_train, Y_validation], ["X_train", "X_validation", "Y_train", "Y_validation"])
+# save_datasets([X_train, X_validation, Y_train, Y_validation], ["X_train", "X_validation", "Y_train", "Y_validation"])
