@@ -35,6 +35,17 @@ def test_load_dataset(cleanup_after_tests, temp_dirs):
     # Check if loaded datasets match the saved datasets
     assert loaded_datasets == TEST_DATASET
 
+
+def test_load_no_dataset(cleanup_after_tests, temp_dirs):
+    # Delete existing datasets
+    clear_datasets(TEST_FILENAME, save_path=temp_dirs)
+
+    loaded_no_dataset = load_datasets(TEST_FILENAME, save_path=temp_dirs)
+
+    # Check if loaded models match the saved models
+    assert loaded_no_dataset  == []
+
+
 def test_clear_datasets(cleanup_after_tests, temp_dirs):
     # Save datasets before testing clearing
     save_datasets(TEST_DATASET, TEST_FILENAME, save_path=temp_dirs)

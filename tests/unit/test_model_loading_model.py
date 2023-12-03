@@ -38,6 +38,15 @@ def test_load_model(cleanup_after_tests, temp_dirs):
     # Check if loaded models match the saved models
     assert loaded_models[0].get_params() == TEST_MODEL.get_params()
 
+def test_load_no_model(cleanup_after_tests, temp_dirs):
+    # Delete existing models
+    clear_models(TEST_FILENAME, save_path=temp_dirs)
+
+    loaded_no_model = load_models(TEST_FILENAME, save_path=temp_dirs)
+
+    # Check if loaded models match the saved models
+    assert loaded_no_model == []
+
 def test_clear_models(cleanup_after_tests, temp_dirs):
     # Save models before testing clearing
     save_models(TEST_MODEL, TEST_FILENAME, save_path=temp_dirs)
