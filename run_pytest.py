@@ -6,8 +6,6 @@
 import pytest
 
 def run_pytest():
-    # os.chdir(".")
-    
     # Run Pytest
     pytest.main(["-v", "tests"])
 
