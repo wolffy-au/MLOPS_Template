@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
-from src.features.feature_selection import get_feature_importance, get_k_best_features, get_recursive_feature_elimination, get_decision_tree, get_linear_regression
+from src.features.feature_evaluation import get_feature_importance, get_k_best_features, get_recursive_feature_elimination, get_decision_tree, get_linear_regression
 
 # Mock data for testing
 @pytest.fixture
