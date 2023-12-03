@@ -1,10 +1,42 @@
 # Example feature_selection.py
 
+import numpy as np
 from matplotlib import pyplot
-from sklearn.feature_selection import SelectKBest, f_classif
-from sklearn.feature_selection import RFE
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import ExtraTreesClassifier
+from numpy import set_printoptions
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.feature_selection import SelectKBest, f_classif, RFE, SelectFromModel, VarianceThreshold, SequentialFeatureSelector
+from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier
+from sklearn.linear_model import LogisticRegression, LinearRegression
+from sklearn.tree import DecisionTreeRegressor
+
+# Normalise feature selection results
+def normalise_feature_scores(results):
+    scaler = MinMaxScaler()
+    scaled_data = scaler.fit_transform(np.array(results).reshape(-1, 1))
+    return scaled_data.flatten()
+
+# Feature Importance: Functions for obtaining feature importance scores from a trained model.
+def get_feature_importance(X, Y, verbose=False):
+    model=ExtraTreesClassifier()
+    model.fit(X, Y)
+    feature_importance = model.feature_importances_
+    if verbose:
+        # summarize feature importance
+        for i,v in enumerate(feature_importance):
+            print('Feature: %0d, Score: %.5f' % (i,v))
+
+    return normalise_feature_scores(feature_importance)
+
+# Feature Selection Functions: This file typically contains functions for selecting a subset of relevant features. This can help improve model performance and reduce overfitting.
+def get_k_best_features(X, Y, k='all', verbose=False):
+    selector = SelectKBest(score_func=f_classif, k=k)
+    fit = selector.fit(X, Y)
+    if verbose:
+        # summarize scores
+        set_printoptions(precision=2)
+        print("Fit scores:", fit.scores_)
+
+    return normalise_feature_scores(fit.scores_)
 
 # Feature Selection Functions: This file typically contains functions for selecting a subset of relevant features. This can help improve model performance and reduce overfitting.
 def select_k_best_features(X, y, k=10):
@@ -13,34 +45,48 @@ def select_k_best_features(X, y, k=10):
     return X_selected
 
 # Recursive Feature Elimination (RFE): Functions for recursively removing the least important features based on model performance.
-def recursive_feature_elimination(X, y, n_features_to_select=10):
-    selector = RFE(model, n_features_to_select=n_features_to_select)
-    X_selected = selector.fit_transform(X, y)
+def get_recursive_feature_elimination(X, Y, verbose=False):
+    model = LogisticRegression(solver='lbfgs', max_iter=1000)
+    selector = RFE(model, n_features_to_select=1)
+    fit = selector.fit(X, Y)
+    if verbose:
+        # summarize scores
+        set_printoptions(precision=2)
+        print("Fit ranking:", fit.ranking_)
+
+    return normalise_feature_scores(fit.ranking_)
+
+# Recursive Feature Elimination (RFE): Functions for recursively removing the least important features based on model performance.
+def select_recursive_feature_elimination(X, Y, n_features_to_select=10, verbose=False):
+    selector = RFE(LogisticRegression(solver='lbfgs', max_iter=1000), n_features_to_select=n_features_to_select)
+    X_selected = selector.fit_transform(X, Y)
+    if verbose:
+        # summarize scores
+        print("X_selected:", X_selected)
+
     return X_selected
 
-# Feature Importance: Functions for obtaining feature importance scores from a trained model.
-def get_feature_importance(X, y, verbose=False, classifier="ExtraTreesClassifier"):
-    """
-    Feature Importance: Functions for obtaining feature importance scores from a trained model.
-
-    Parameters:
-    - classifier (str): The setting for the meta estimator classifier. Default is "ExtraTreesClassifier".
-      Possible settings include "ExtraTreesClassifier" or "RandomForestClassifier".
-    """
-    if classifier == "RandomForestClassifier":
-        model = RandomForestClassifier()
-    else:
-        # Perform default actions
-        model = ExtraTreesClassifier()
-
-    model.fit(X, y)
-    feature_importance = model.feature_importances_
-
+# Linear Regression: Functions for recursively removing the least important features based on model performance.
+def get_linear_regression(X, Y, verbose=False):
+    model = LinearRegression()
+    model.fit(X, Y)
     if verbose:
-        # summarize feature importance
-        for i,v in enumerate(feature_importance):
-            print('Feature: %0d, Score: %.5f' % (i,v))
-    return feature_importance
+        # summarize scores
+        set_printoptions(precision=2)
+        print("Feature coefficient:", model.coef_)
+
+    return normalise_feature_scores(model.coef_)
+
+# Linear Regression: Functions for recursively removing the least important features based on model performance.
+def get_decision_tree(X, Y, verbose=False):
+    model = DecisionTreeRegressor()
+    model.fit(X, Y)
+    if verbose:
+        # summarize scores
+        set_printoptions(precision=2)
+        print("Feature importances:", model.feature_importances_)
+
+    return normalise_feature_scores(model.feature_importances_)
 
 # Show Feature Importance as a graph
 def show_feature_importance(importance):
