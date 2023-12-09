@@ -1,4 +1,4 @@
-# Example feature_selection.py
+# Example feature_evaluation.py
 
 import numpy as np
 from matplotlib import pyplot
