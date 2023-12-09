@@ -22,7 +22,7 @@ def load_api_data(api_endpoint):
     pass
 
 # Data Exploration Functions: In some cases, you might include functions for exploring the loaded data, such as summary statistics, distribution plots, or other exploratory data analysis (EDA) tasks.
-def explore_dataset(dataset):
+def explore_dataset(dataset, show_ui=False):
     # Code for data exploration tasks
     print(dataset.shape)
     print()
@@ -30,21 +30,22 @@ def explore_dataset(dataset):
     print()
     print(dataset.describe())
     print()
-    print(dataset.groupby('class').size())
+    print(dataset.groupby([dataset.columns[-1]]).size())
     print()
 
-    # box and whisker plots
-    #dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
-    dataset.plot(kind='box', subplots=True, sharex=False, sharey=False)
-    plt.show()
+    if show_ui:
+        # box and whisker plots
+        #dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
+        dataset.plot(kind='box', subplots=True, sharex=False, sharey=False)
+        plt.show()
 
-    # histograms
-    dataset.hist()
-    plt.show()
+        # histograms
+        dataset.hist()
+        plt.show()
 
-    # scatter plot matrix
-    scatter_matrix(dataset)
-    plt.show()
+        # scatter plot matrix
+        scatter_matrix(dataset)
+        plt.show()
 
 SAVE_DATASET_PATH = os.path.normpath("data/processed/")
 
