@@ -14,5 +14,7 @@ def create_directory_structure(project_root):
     print(f"Directory structure created in {project_root}")
 
 if __name__ == "__main__":
-    project_directory = input("Enter the path for your project root directory: ")
+    project_directory = input("Enter the path for your project root directory: ['.']")
+    if project_directory == "":
+        project_directory = "."
     create_directory_structure(project_directory)
