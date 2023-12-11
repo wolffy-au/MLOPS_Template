@@ -20,7 +20,7 @@ models = [
     ('SVM', SVC(gamma='auto'))
 ]
 
-def algorithm_evaluation(X_train, Y_train):
+def algorithm_evaluation(X_train, Y_train, verbose=False):
     # evaluate each model in turn
     results = []
     names = []
@@ -29,7 +29,8 @@ def algorithm_evaluation(X_train, Y_train):
         cv_results_mean, cv_results_std = cross_validate_model(model, X_train, Y_train, cv=kfold, scoring='accuracy')
         results.append([cv_results_mean, cv_results_std])
         names.append(name)
-        print('%s: %f (%f)' % (name, cv_results_mean, cv_results_std))
+        if verbose:
+            print('%s: %f (%f)' % (name, cv_results_mean, cv_results_std))
     return results, names
 
 def compare_algorithms(results, names):
