@@ -2,7 +2,7 @@ import pytest
 import numpy as np
 import pandas as pd
 from unittest.mock import patch, MagicMock
-from libmlops.data.data_preprocessing import split_train_test, get_xy
+from libmlops.data.data_preprocessing import split_train_test, split_train_test_xy, get_xy
 
 # Mocking the train_test_split function
 @patch('libmlops.data.data_preprocessing.train_test_split')  # Replace 'your_module' with the actual module name
@@ -34,6 +34,44 @@ def test_split_train_test(mock_train_test_split):
         test_size=0.2,                           # test_size
         random_state=42                             # random_state
     )
+
+# Mocking the train_test_split function
+@patch('libmlops.data.data_preprocessing.train_test_split')
+def test_split_train_test_xy(mock_train_test_split):
+    # Mock data for testing
+    mock_dataset = MagicMock()
+    mock_dataset.return_value = (
+        [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10]], # X
+        [0, 1, 0, 1, 0] # Y
+    )
+
+    # Mock the train_test_split function to return predefined values
+    mock_train_test_split.return_value = (
+        [[1, 2], [3, 4], [5, 6]],  # X_train
+        [[7, 8], [9, 10]],         # X_validation
+        [0, 1, 0],                 # Y_train
+        [1, 0]                     # Y_validation
+    )
+
+    X = mock_dataset.values[:, :-1]
+    Y = mock_dataset.values[:, -1]
+    # Call the function under test
+    X_train, X_validation, Y_train, Y_validation = split_train_test_xy(X, Y)
+
+    # Assertions
+    assert X_train == [[1, 2], [3, 4], [5, 6]]
+    assert X_validation == [[7, 8], [9, 10]]
+    assert Y_train == [0, 1, 0]
+    assert Y_validation == [1, 0]
+
+    # Ensure train_test_split was called with the correct arguments
+    mock_train_test_split.assert_called_once_with(
+        mock_dataset.values[:, :-1],  # X
+        mock_dataset.values[:, -1],    # y
+        test_size=0.2,                 # test_size
+        random_state=42                # random_state
+    )
+
 
 # Test the get_xy function
 def test_get_xy():
