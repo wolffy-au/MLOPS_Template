@@ -8,7 +8,7 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.decomposition import PCA
 from sklearn.inspection import permutation_importance
 from matplotlib import pyplot as plt
-from features.feature_evaluation import normalise_feature_scores
+from libmlops.features.feature_evaluation import normalise_feature_scores
 
 # Spot Check Feature Selection algorithms
 models = [
