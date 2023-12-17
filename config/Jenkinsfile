@@ -31,6 +31,11 @@ pipeline {
                 script {
                     // sh "pkg upgrade python39 py39-pip py39-numpy py39-scipy py39-matplotlib py39-pandas py39-scikit-learn py39-joblib"
                     sh "${PYTHON_HOME}pip3 install -r requirements.txt"
+                    // sh "${PYTHON_HOME}pyenv install -s 3.9.13"
+                    // sh "${PYTHON_HOME}pyenv local system"
+                    // sh "${PYTHON_HOME}python --version"
+                    // sh "${PYTHON_HOME}poetry env use 3.9"
+                    // sh "${PYTHON_HOME}poetry install --no-root --without=dev"
                 }
             }
         }
