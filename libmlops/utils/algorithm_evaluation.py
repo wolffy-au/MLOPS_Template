@@ -8,7 +8,7 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 from matplotlib import pyplot as plt
-from models.model_evaluation import cross_validate_model
+from libmlops.models.model_evaluation import cross_validate_model
 
 # Spot Check Algorithms
 models = [

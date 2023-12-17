@@ -4,10 +4,10 @@
 # Executed during the CI/CD pipeline to update models with new data or retrain periodically.
 
 from sklearn.svm import SVC
-from data.data_loading import load_datasets
-from models.model_loading import load_models, save_models
-from models.model_training import train_model
-from models.model_evaluation import confusion_matrix_model, plot_confusion_matrix
+from libmlops.data.data_loading import load_datasets
+from libmlops.models.model_loading import load_models, save_models
+from libmlops.models.model_training import train_model
+from libmlops.models.model_evaluation import confusion_matrix_model, plot_confusion_matrix
 
 def run_train():
     # print("Loading training datasets")

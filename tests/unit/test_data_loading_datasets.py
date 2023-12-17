@@ -1,6 +1,6 @@
 import pytest
 import os
-from src.data.data_loading import save_datasets, load_datasets, clear_datasets
+from libmlops.data.data_loading import save_datasets, load_datasets, clear_datasets
 
 # Fixture to create temporary directories
 @pytest.fixture

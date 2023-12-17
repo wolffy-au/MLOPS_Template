@@ -3,7 +3,7 @@
 # It may include code for handling input data, calling the model, and processing the output.
 # Part of the deployment pipeline to ensure that the deployed model functions as expected.
 
-from models.model_loading import load_models
+from libmlops.models.model_loading import load_models
 
 def run_inference():
     # print("Loading previous model")

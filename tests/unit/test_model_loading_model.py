@@ -3,7 +3,7 @@ import os
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
-from src.models.model_loading import save_models, load_models, clear_models
+from libmlops.models.model_loading import save_models, load_models, clear_models
 
 # Fixture to create temporary directories
 @pytest.fixture

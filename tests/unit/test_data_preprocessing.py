@@ -2,10 +2,10 @@ import pytest
 import numpy as np
 import pandas as pd
 from unittest.mock import patch, MagicMock
-from src.data.data_preprocessing import split_train_test, get_xy
+from libmlops.data.data_preprocessing import split_train_test, get_xy
 
 # Mocking the train_test_split function
-@patch('src.data.data_preprocessing.train_test_split')  # Replace 'your_module' with the actual module name
+@patch('libmlops.data.data_preprocessing.train_test_split')  # Replace 'your_module' with the actual module name
 def test_split_train_test(mock_train_test_split):
     # Mock data for testing
     mock_dataset = MagicMock()

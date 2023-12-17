@@ -3,9 +3,9 @@
 # It may generate metrics, visualizations, or reports for model evaluation.
 # Typically executed after model training to ensure model quality before deployment.
 
-from data.data_loading import load_datasets
-from models.model_loading import load_models
-from models.model_evaluation import evaluate_model, cross_validate_model, confusion_matrix_model, plot_confusion_matrix
+from libmlops.data.data_loading import load_datasets
+from libmlops.models.model_loading import load_models
+from libmlops.models.model_evaluation import evaluate_model, cross_validate_model, confusion_matrix_model, plot_confusion_matrix
 
 def run_evaluate():
     # print("Loading validation datasets")

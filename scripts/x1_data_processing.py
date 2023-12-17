@@ -3,9 +3,9 @@
 # It is typically executed as a part of the CI/CD pipeline to ensure consistent data processing.
 # May be triggered whenever new data is available or as a scheduled task.
 
-from data.data_loading import load_csv_data, explore_dataset, save_datasets
-from data.data_preprocessing import split_train_test
-from utils.algorithm_evaluation import algorithm_evaluation, compare_algorithms
+from libmlops.data.data_loading import load_csv_data, explore_dataset, save_datasets
+from libmlops.data.data_preprocessing import split_train_test
+from libmlops.utils.algorithm_evaluation import algorithm_evaluation, compare_algorithms
 
 def run_data_processing():
     # Load dataset

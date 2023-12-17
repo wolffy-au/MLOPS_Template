@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 from sklearn.datasets import load_iris
-from src.data.data_loading import load_csv_data
+from libmlops.data.data_loading import load_csv_data
 
 # Create a sample CSV file for testing using the Iris dataset
 @pytest.fixture
