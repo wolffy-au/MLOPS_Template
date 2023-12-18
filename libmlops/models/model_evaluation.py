@@ -9,7 +9,7 @@ from sklearn.metrics import accuracy_score, classification_report
 def evaluate_model(model, X_test, y_test):
     y_pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
-    report = classification_report(y_test, y_pred)
+    report = classification_report(y_test, y_pred, zero_division=0)
     return accuracy, report
 
 # Cross-Validation: If you use cross-validation to assess model performance, you might include functions for performing cross-validation and summarizing the results.
