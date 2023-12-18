@@ -10,10 +10,12 @@ def run_main():
     # Run the script using subprocess
     run_pytest()
     run_data_processing()
+    # features = run_data_processing()
     run_train()
     run_evaluate()
     run_deploy()
     run_inference()
+    # run_inference(features)
     run_monitor()
 
 if __name__ == "__main__":
