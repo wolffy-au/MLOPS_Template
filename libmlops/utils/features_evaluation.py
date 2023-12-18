@@ -1,7 +1,7 @@
 # Load libraries
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier, RandomForestRegressor
+from sklearn.ensemble import ExtraTreesClassifier, RandomForestClassifier, RandomForestRegressor, HistGradientBoostingClassifier
 from sklearn.feature_selection import SelectKBest, f_classif, RFE
 from sklearn.linear_model import LogisticRegression, LinearRegression
 from sklearn.tree import DecisionTreeRegressor
@@ -15,6 +15,7 @@ from libmlops.features.feature_evaluation import normalise_feature_scores
 # Spot Check Feature Selection algorithms
 models = [
     ('ExtraTreesClassifier', ExtraTreesClassifier()),
+    ('HistGradientBoostingClassifier', HistGradientBoostingClassifier()),
     ('RandomForestClassifier', RandomForestClassifier()),
     ('RFE', RFE(LogisticRegression(solver='lbfgs', max_iter=1000))),
     ('LinearRegression', LinearRegression()),
