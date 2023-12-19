@@ -4,10 +4,11 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.svm import SVR
 from sklearn.neighbors import KNeighborsRegressor
-from sklearn.model_selection import StratifiedKFold
+from sklearn.model_selection import KFold
 from sklearn.linear_model import LogisticRegression
 from matplotlib import pyplot as plt
 from libmlops.models.model_evaluation import cross_validate_model
+# from sklearn.metrics import make_scorer, mean_squared_error
 
 # Spot Check Algorithms
 models = [
@@ -18,8 +19,8 @@ models = [
     ('RFR', RandomForestRegressor(n_estimators=100, random_state=42)),
     ('SVR', SVR(kernel='linear')),
     ('KNR', KNeighborsRegressor(n_neighbors=3)),
-    ('GBR', GradientBoostingRegressor(n_estimators=100, learning_rate=0.1, random_state=42)),
-    ('LOGR', LogisticRegression(solver='liblinear', multi_class='ovr')),
+    ('GBR', GradientBoostingRegressor()),
+    # ('LOGR', LogisticRegression(random_state=42)),
 ]
 
 def regressor_evaluation(X_train, Y_train, verbose=False):
@@ -27,8 +28,8 @@ def regressor_evaluation(X_train, Y_train, verbose=False):
     results = []
     names = []
     for name, model in models:
-        kfold = StratifiedKFold(n_splits=10, random_state=1, shuffle=True)
-        cv_results_mean, cv_results_std = cross_validate_model(model, X_train, Y_train, cv=kfold, scoring='accuracy')
+        kfold = KFold(n_splits=10, random_state=1, shuffle=True)
+        cv_results_mean, cv_results_std = cross_validate_model(model, X_train, Y_train, cv=kfold, scoring='neg_mean_squared_error')
         results.append([cv_results_mean, cv_results_std])
         names.append(name)
         if verbose:
