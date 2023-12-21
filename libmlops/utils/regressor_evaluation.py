@@ -20,7 +20,7 @@ models = [
     ('SVR', SVR(kernel='linear')),
     ('KNR', KNeighborsRegressor(n_jobs=4)),
     ('GBR', GradientBoostingRegressor()),
-    ('LOGR', LogisticRegression(random_state=42, n_jobs=4)),
+    # ('LOGR', LogisticRegression(n_jobs=4)),
 ]
 
 def regressor_evaluation(X_train, Y_train, verbose=False):

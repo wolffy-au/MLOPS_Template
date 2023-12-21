@@ -8,9 +8,7 @@ from sklearn.tree import DecisionTreeRegressor
 from xgboost import XGBRegressor
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.decomposition import PCA
-from sklearn.inspection import permutation_importance
 from matplotlib import pyplot as plt
-from libmlops.features.feature_evaluation import normalise_feature_scores
 
 # Spot Check Feature Selection algorithms
 models = [
@@ -27,32 +25,11 @@ models = [
     # ('SelectKBest', SelectKBest(score_func=f_classif, k="all")),
     ]
 
-def features_evaluation(X_train, Y_train, verbose=False):
-    # evaluate each model in turn
-    features = []
-    for name, model in models:
-        model.fit(X_train, Y_train)
-        # imp_results = model.feature_importances_
-        # perform permutation importance
-        imp_results = permutation_importance(model, X_train, Y_train, scoring='neg_mean_squared_error')
-        imp_results_mean = normalise_feature_scores(imp_results['importances_mean'])
-        # imp_results_std = normalise_feature_scores(imp_results['importances_std'])
-        f = []
-        for i,v in enumerate(imp_results_mean):
-            if v >= 0.5:
-                f.append(i)
-                if i not in features:
-                    features.append(i)
-
-        if verbose:
-            print(name, f)
-
-    if verbose:
-        print(features)
-    
-    return features
-
 def keep_features(data, features, keep_y=False):
+    # sort features highest to lowest
+    # if all(isinstance(x, int) for x in features):
+    features = sorted(features) #, reverse=True)
+
     if isinstance(data, pd.DataFrame):
         if keep_y:
             return data.iloc[:, (features + [-1])]
