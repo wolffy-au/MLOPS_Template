@@ -5,8 +5,8 @@
 
 from libmlops.data.data_loading import load_csv_data, explore_dataset, save_datasets
 from libmlops.data.data_preprocessing import get_xy, split_train_test
-from libmlops.utils.classifier_evaluation import classifier_evaluation, compare_algorithms
-from libmlops.utils.features_evaluation import features_evaluation, keep_features
+from libmlops.utils.classifier_evaluation import algorithm_evaluation, features_evaluation, compare_algorithms
+from libmlops.utils.features_evaluation import keep_features
 
 def run_data_processing():
     # Load dataset
