@@ -3,18 +3,25 @@
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from sklearn.model_selection import cross_val_score
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score, classification_report, mean_absolute_error, r2_score
 
 # Evaluation Metrics: This file typically contains functions for evaluating the performance of your trained models. These functions calculate metrics such as accuracy, precision, recall, F1 score, and others, depending on the nature of your problem (classification, regression, etc.).
-def evaluate_model(model, X_test, y_test):
+def evaluate_classifier_model(model, X_test, y_test):
     y_pred = model.predict(X_test)
     accuracy = accuracy_score(y_test, y_pred)
     report = classification_report(y_test, y_pred, zero_division=0)
     return accuracy, report
 
+# Evaluation Metrics: This file typically contains functions for evaluating the performance of your trained models. These functions calculate metrics such as accuracy, precision, recall, F1 score, and others, depending on the nature of your problem (classification, regression, etc.).
+def evaluate_regressor_model(model, X_test, y_test):
+    y_pred = model.predict(X_test)
+    mae = mean_absolute_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
+    return r2, mae
+
 # Cross-Validation: If you use cross-validation to assess model performance, you might include functions for performing cross-validation and summarizing the results.
 def cross_validate_model(model, X, y, cv=5, scoring='accuracy'):
-    scores = cross_val_score(model, X, y, cv=cv, scoring=scoring)
+    scores = cross_val_score(model, X, y, cv=cv, scoring=scoring, n_jobs=4)
     return scores.mean(), scores.std()
 
 # Performance Functions: Functions that help you understand model performance, such as confusion matrices, ROC curves, and precision-recall curves.

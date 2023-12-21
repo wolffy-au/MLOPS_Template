@@ -11,6 +11,7 @@ def add_interaction_feature(df, feature1, feature2):
 def extract_date_features(df, date_column):
     df['day_of_week'] = df[date_column].dt.dayofweek
     df['month'] = df[date_column].dt.month
+    df['year'] = df[date_column].dt.year
 
 # Scaling and Normalization: Functions for scaling numerical features to a standard range or normalizing them to have a mean of 0 and a standard deviation of 1.
 def scale_numerical_features(df, numerical_features):
@@ -24,8 +25,7 @@ def normalise_numerical_features(df, numerical_features):
 
 # Handling Categorical Features: If your dataset contains categorical features, you might include functions for one-hot encoding or label encoding these features.
 def one_hot_encode_categorical_features(df, categorical_features):
-    df = pd.get_dummies(df, columns=categorical_features, drop_first=True)
-    df.pop(df.columns[0])
+    df = pd.get_dummies(df, columns=categorical_features) #, drop_first=True)
     return df
 
 # Handling Categorical Features: If your dataset contains categorical features, you might include functions for one-hot encoding or label encoding these features.

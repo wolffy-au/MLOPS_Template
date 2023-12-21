@@ -8,19 +8,19 @@ from sklearn.model_selection import KFold
 from sklearn.linear_model import LogisticRegression
 from matplotlib import pyplot as plt
 from libmlops.models.model_evaluation import cross_validate_model
-# from sklearn.metrics import make_scorer, mean_squared_error
+from sklearn.metrics import mean_absolute_error, r2_score
 
 # Spot Check Algorithms
 models = [
-    ('LINR', LinearRegression()),
+    ('LINR', LinearRegression(n_jobs=4)),
     ('RDG', Ridge(alpha=1.0)),
     ('LSO', Lasso(alpha=1.0)),
     ('DTR', DecisionTreeRegressor()),
-    ('RFR', RandomForestRegressor(n_estimators=100, random_state=42)),
+    ('RFR', RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=4)),
     ('SVR', SVR(kernel='linear')),
-    ('KNR', KNeighborsRegressor(n_neighbors=3)),
+    ('KNR', KNeighborsRegressor(n_neighbors=3, n_jobs=4)),
     ('GBR', GradientBoostingRegressor()),
-    # ('LOGR', LogisticRegression(random_state=42)),
+    ('LOGR', LogisticRegression(random_state=42, n_jobs=4)),
 ]
 
 def regressor_evaluation(X_train, Y_train, verbose=False):
@@ -29,7 +29,7 @@ def regressor_evaluation(X_train, Y_train, verbose=False):
     names = []
     for name, model in models:
         kfold = KFold(n_splits=10, random_state=1, shuffle=True)
-        cv_results_mean, cv_results_std = cross_validate_model(model, X_train, Y_train, cv=kfold, scoring='neg_mean_squared_error')
+        cv_results_mean, cv_results_std = cross_validate_model(model, X_train, Y_train, cv=kfold, scoring='neg_mean_absolute_error')
         results.append([cv_results_mean, cv_results_std])
         names.append(name)
         if verbose:

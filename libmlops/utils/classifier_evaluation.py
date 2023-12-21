@@ -20,7 +20,7 @@ models = [
     ('SVM', SVC(gamma='auto'))
 ]
 
-def algorithm_evaluation(X_train, Y_train, verbose=False):
+def classifier_evaluation(X_train, Y_train, verbose=False):
     # evaluate each model in turn
     results = []
     names = []

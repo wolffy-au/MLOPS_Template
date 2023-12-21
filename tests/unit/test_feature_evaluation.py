@@ -30,8 +30,8 @@ def test_get_feature_importance(mock_data):
     # Check that the feature_scores array is returned
     assert isinstance(feature_scores, np.ndarray)
     assert len(feature_scores) == X.shape[1]
-    assert np.all(feature_scores >= 0.)
-    assert np.all(feature_scores <= 1.00000001)
+    assert np.all(feature_scores >= 0.0)
+    assert np.all(feature_scores <= 1.0)
 
 # Test get_k_best_features function
 def test_get_k_best_features(mock_data):
