@@ -13,12 +13,12 @@ from sklearn.metrics import mean_absolute_error, r2_score
 # Spot Check Algorithms
 models = [
     ('LINR', LinearRegression(n_jobs=4)),
-    ('RDG', Ridge(alpha=1.0)),
-    ('LSO', Lasso(alpha=1.0)),
+    ('RDG', Ridge()),
+    ('LSO', Lasso()),
     ('DTR', DecisionTreeRegressor()),
-    ('RFR', RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=4)),
+    ('RFR', RandomForestRegressor(n_jobs=4)),
     ('SVR', SVR(kernel='linear')),
-    ('KNR', KNeighborsRegressor(n_neighbors=3, n_jobs=4)),
+    ('KNR', KNeighborsRegressor(n_jobs=4)),
     ('GBR', GradientBoostingRegressor()),
     ('LOGR', LogisticRegression(random_state=42, n_jobs=4)),
 ]
