@@ -11,19 +11,19 @@ from sklearn.decomposition import PCA
 from matplotlib import pyplot as plt
 
 # Spot Check Feature Selection algorithms
-models = [
-    ('ExtraTreesClassifier', ExtraTreesClassifier()),
-    ('HistGradientBoostingClassifier', HistGradientBoostingClassifier()),
-    ('RandomForestClassifier', RandomForestClassifier()),
-    ('RFE', RFE(LogisticRegression(solver='lbfgs', max_iter=1000))),
-    ('LinearRegression', LinearRegression()),
-    ('DecisionTreeRegressor', DecisionTreeRegressor()),
-    ('RandomForestRegressor', RandomForestRegressor()),
-    ('XGBRegressor', XGBRegressor()),
-    ('KNeighborsRegressor', KNeighborsRegressor()),
-    # ('PCA', PCA(n_components=4)),
-    # ('SelectKBest', SelectKBest(score_func=f_classif, k="all")),
-    ]
+# models = [
+#     ('ExtraTreesClassifier', ExtraTreesClassifier()),
+#     ('HistGradientBoostingClassifier', HistGradientBoostingClassifier()),
+#     ('RandomForestClassifier', RandomForestClassifier()),
+#     ('RFE', RFE(LogisticRegression(solver='lbfgs', max_iter=1000))),
+#     ('LinearRegression', LinearRegression()),
+#     ('DecisionTreeRegressor', DecisionTreeRegressor()),
+#     ('RandomForestRegressor', RandomForestRegressor()),
+#     ('XGBRegressor', XGBRegressor()),
+#     ('KNeighborsRegressor', KNeighborsRegressor()),
+#     # ('PCA', PCA(n_components=4)),
+#     # ('SelectKBest', SelectKBest(score_func=f_classif, k="all")),
+#     ]
 
 def keep_features(data, features, keep_y=False):
     # sort features highest to lowest
