@@ -1,3 +1,4 @@
+from scripts.mkdirs import create_directory_structure
 from scripts.x1_data_processing import run_data_processing
 from scripts.x2_train import run_train
 from scripts.x3_evaluate import run_evaluate
@@ -7,6 +8,7 @@ from scripts.x6_monitor import run_monitor
 from scripts.x7_test import run_pytest
 
 def run_main():
+    create_directory_structure('.')
     # Run the script using subprocess
     run_pytest()
     run_data_processing()
