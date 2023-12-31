@@ -12,29 +12,36 @@ from sklearn.svm import SVC
 from libmlops.data.data_loading import load_datasets
 from libmlops.models.model_loading import load_models, save_models
 from libmlops.models.model_training import train_model
-from libmlops.models.model_evaluation import confusion_matrix_model, plot_confusion_matrix
+from libmlops.models.model_evaluation import (
+    confusion_matrix_model,
+    plot_confusion_matrix,
+)
 
 LOAD_MODEL = False
 
+
 def run_train():
     print("Loading training datasets")
-    [X_train, Y_train] = load_datasets(["X_train", "Y_train"], 'ucmltutorial/data/processed/')
+    [X_train, Y_train] = load_datasets(
+        ["X_train", "Y_train"], "uc01mltutorial/data/processed/"
+    )
 
     model = []
     model_name = "finalised_model"
     if LOAD_MODEL:
         print("Loading previous model")
-        model = load_models(model_name, '../data/processed/')
+        model = load_models(model_name, "../data/processed/")
 
     if model == []:
         print("Does not exist - creating new model")
-        model = SVC(gamma='auto')
+        model = SVC(gamma="auto")
         print("Training model")
         train_model(model, X_train, Y_train)
         print("Saving model")
-        save_models(model, model_name, 'ucmltutorial/data/processed/')
-    
+        save_models(model, model_name, "uc01mltutorial/data/processed/")
+
     pass
+
 
 if __name__ == "__main__":
     run_train()

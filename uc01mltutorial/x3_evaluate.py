@@ -5,27 +5,38 @@
 
 from libmlops.data.data_loading import load_datasets
 from libmlops.models.model_loading import load_models
-from libmlops.models.model_evaluation import evaluate_classifier_model, cross_validate_model, confusion_matrix_model, plot_confusion_matrix
+from libmlops.models.model_evaluation import (
+    evaluate_classifier_model,
+    cross_validate_model,
+    confusion_matrix_model,
+    plot_confusion_matrix,
+)
+
 
 def run_evaluate():
     print("Loading validation datasets")
-    [X_validation, Y_validation] = load_datasets(["X_validation", "Y_validation"], 'ucmltutorial/data/processed/')
+    [X_validation, Y_validation] = load_datasets(
+        ["X_validation", "Y_validation"], "uc01mltutorial/data/processed/"
+    )
 
     print("Loading previous model")
     model_name = "finalised_model"
-    [model] = load_models(model_name, 'ucmltutorial/data/processed/')
+    [model] = load_models(model_name, "uc01mltutorial/data/processed/")
 
     print("Evaluating model")
     accuracy, report = evaluate_classifier_model(model, X_validation, Y_validation)
     print("Accuracy score: ", accuracy, "\n")
     print("Classification report:\n", report)
 
-    cv_results_mean, cv_results_std = cross_validate_model(model, X_validation, Y_validation)
+    cv_results_mean, cv_results_std = cross_validate_model(
+        model, X_validation, Y_validation
+    )
     print("Cross-validation: %f Mean (%f Standard)" % (cv_results_mean, cv_results_std))
 
     cm = confusion_matrix_model(model, X_validation, Y_validation)
     print("Confusion Matrix:\n", cm)
     # plot_confusion_matrix(cm, model)
+
 
 if __name__ == "__main__":
     run_evaluate()

@@ -5,15 +5,26 @@
 
 from libmlops.data.data_loading import load_csv_data, explore_dataset, save_datasets
 from libmlops.data.data_preprocessing import get_xy, split_train_test
-from libmlops.utils.classifier_evaluation import algorithm_evaluation, features_evaluation, compare_algorithms
+from libmlops.utils.classifier_evaluation import (
+    algorithm_evaluation,
+    features_evaluation,
+    compare_algorithms,
+)
 from libmlops.utils.features_evaluation import keep_features
+
 
 def run_data_processing():
     # Load dataset
     # url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/iris.csv"
-    file_path = "ucmltutorial/data/external/iris.csv"
+    file_path = "uc01mltutorial/data/external/iris.csv"
     dataset = load_data(file_path)
-    dataset.columns = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
+    dataset.columns = [
+        "sepal-length",
+        "sepal-width",
+        "petal-length",
+        "petal-width",
+        "class",
+    ]
     explore_dataset(dataset)
 
     print(dataset.shape)
@@ -25,9 +36,16 @@ def run_data_processing():
     results, names = algorithm_evaluation(X, Y, verbose=True)
     # compare_algorithms(results, names)
 
-    X_train, X_validation, Y_train, Y_validation = split_train_test(dataset, random_state=1)
-    save_datasets([X_train, X_validation, Y_train, Y_validation], ["X_train", "X_validation", "Y_train", "Y_validation"], 'ucmltutorial/data/processed/')
+    X_train, X_validation, Y_train, Y_validation = split_train_test(
+        dataset, random_state=1
+    )
+    save_datasets(
+        [X_train, X_validation, Y_train, Y_validation],
+        ["X_train", "X_validation", "Y_train", "Y_validation"],
+        "uc01mltutorial/data/processed/",
+    )
     return features
+
 
 def load_data(file_path, names=[]):
     if names == []:
@@ -35,9 +53,11 @@ def load_data(file_path, names=[]):
     else:
         return load_csv_data(file_path, names=names)
 
+
 def identify_features(dataset):
     X, Y = get_xy(dataset)
     return features_evaluation(X, Y, verbose=True)
+
 
 if __name__ == "__main__":
     run_data_processing()
