@@ -4,7 +4,7 @@
 # May be triggered whenever new data is available or as a scheduled task.
 
 from libmlops.data.data_loading import load_csv_data, explore_dataset, save_datasets
-from libmlops.data.data_preprocessing import get_xy, split_train_test
+from libmlops.data.data_preprocessing import get_xy, split_train_test_xy
 from libmlops.utils.classifier_evaluation import (
     algorithm_evaluation,
     features_evaluation,
@@ -27,17 +27,23 @@ def run_data_processing():
     ]
     explore_dataset(dataset)
 
-    print(dataset.shape)
-    features = identify_features(dataset)
-    dataset = keep_features(dataset, features, keep_y=True)
-    print(dataset.shape)
-
     X, Y = get_xy(dataset)
-    results, names = algorithm_evaluation(X, Y, verbose=True)
-    # compare_algorithms(results, names)
 
-    X_train, X_validation, Y_train, Y_validation = split_train_test(
-        dataset, random_state=1
+    print(dataset.shape)
+    features = features_evaluation(X, Y, verbose=True)
+    print(features)
+    # 2. Comment this out if you want to test integer indices
+    features = [dataset.columns[v] for v in features]
+    print(features)
+    # 1. Comment this out if you want to disable feature selection
+    X = keep_features(dataset, features)
+    print(X.shape, Y.shape)
+
+    results, algors = algorithm_evaluation(X, Y, verbose=True)
+    # compare_algorithms(results, algors)
+
+    X_train, X_validation, Y_train, Y_validation = split_train_test_xy(
+        X, Y, random_state=1
     )
     save_datasets(
         [X_train, X_validation, Y_train, Y_validation],
@@ -52,11 +58,6 @@ def load_data(file_path, names=[]):
         return load_csv_data(file_path)
     else:
         return load_csv_data(file_path, names=names)
-
-
-def identify_features(dataset):
-    X, Y = get_xy(dataset)
-    return features_evaluation(X, Y, verbose=True)
 
 
 if __name__ == "__main__":
