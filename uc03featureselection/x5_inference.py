@@ -4,7 +4,6 @@
 # Part of the deployment pipeline to ensure that the deployed model functions as expected.
 
 import pandas as pd
-from libmlops.utils.features_evaluation import keep_features
 from libmlops.models.model_loading import load_models
 from libmlops.utils.features_evaluation import keep_features
 
@@ -28,15 +27,20 @@ def run_inference(features=[]):
         [10, 168, 74, 0, 0, 38.0, 0.537, 34],
         [1, 189, 60, 23, 846, 30.1, 0.398, 59],
     ]
+
     df = pd.DataFrame(data, columns=names)
+    print(df.head())
 
     if features != []:
         df = keep_features(df, features)
         print(features, df.columns)
+        print(df.head())
 
     for index, row in df.iterrows():
         # test the model with 1 row
+        print(index, row.values)
         print(model.predict(pd.DataFrame([row.values], columns=row.index)))
+
     pass
 
 

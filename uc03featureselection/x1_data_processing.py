@@ -19,6 +19,7 @@ from libmlops.features.feature_evaluation import (
     get_decision_tree,
 )
 from libmlops.utils.features_evaluation import keep_features
+from libmlops.features.feature_selection import convert_indices
 
 
 def run_data_processing():
@@ -37,10 +38,11 @@ def run_data_processing():
     features = features_evaluation(X, Y, verbose=True)
     print(features)
     # 2. Comment this out if you want to test integer indices
-    features = [dataset.columns[v] for v in features]
+    features = convert_indices(dataset, features)
     print(features)
     # 1. Comment this out if you want to disable feature selection
     X = keep_features(dataset, features)
+    print(X.head(), Y.head())
     print(X.shape, Y.shape)
 
     results, algors = algorithm_evaluation(X, Y, verbose=True)
