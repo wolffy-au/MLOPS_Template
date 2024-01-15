@@ -25,8 +25,8 @@ def run_evaluate():
     r2, mae, cv_results_mean, cv_results_std = model_evaluation(
         model, X_validation, Y_validation
     )
-    print("R-squared (coefficient of determination) regression score: ", r2, "\n")
-    print("Mean Absolute Error:\n", mae)
+    print("R-squared (coefficient of determination) regression score: ", r2)
+    print("Mean Absolute Error:", mae)
     print("Cross-validation: %f Mean (%f Standard)" % (cv_results_mean, cv_results_std))
 
     pass
